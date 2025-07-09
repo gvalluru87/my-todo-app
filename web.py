@@ -21,8 +21,12 @@ def add_todo():
 
 st.write("## Your Todos")
 
-for todo in todos:
-    st.checkbox(todo)
+for index, todo in enumerate(todos):
+    checkbox = st.checkbox(todo, key=todo)
+    if checkbox:
+        todos.pop(index)
+        Functions.write_todos(todos)
+        st.experimental_rerun()  # Refresh the page to update the todo list
 
 
 new_todo = st.text_input(label="", placeholder="Add a new todo..", key="new_todo",on_change=add_todo)
